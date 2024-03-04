@@ -28,12 +28,12 @@ public sealed partial class Guard
         }
     }
 
-    public static void Lenght(string content, int stringLength)
+    public static void Length(string content, int stringLength)
     {
-        Guard.Lenght(content, stringLength: stringLength, perform: ArgumentAction);
+        Guard.Length(content, stringLength: stringLength, perform: ArgumentAction);
     }
 
-    public static void Lenght(string content, int stringLength, Action perform)
+    public static void Length(string content, int stringLength, Action perform)
     {
         if (content.Length != stringLength)
         {
