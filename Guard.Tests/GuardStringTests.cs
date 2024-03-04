@@ -62,7 +62,7 @@ public class GuardStringTests
     [InlineData("A Word", 6)]
     public void Test_StringLength(string content, int expectedLength)
     {
-        Fitomad.Guard.Guard.Lenght(content, stringLength: expectedLength);
+        Fitomad.Guard.Guard.Length(content, stringLength: expectedLength);
     }
 
     [Theory]
@@ -77,7 +77,7 @@ public class GuardStringTests
     {
         Assert.Throws<ArgumentException>(testCode: () => 
         {
-            Fitomad.Guard.Guard.Lenght(content, stringLength: (expectedLength + 1));
+            Fitomad.Guard.Guard.Length(content, stringLength: (expectedLength + 1));
         });
         
     }
