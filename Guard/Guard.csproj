@@ -4,6 +4,15 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <!-- nuget -->
+    <PackageId>Fitomad.Guard</PackageId>
+    <Version>1.0.1</Version>
+    <Authors>Adolfo</Authors>
+    <Company>Fitomad</Company>
+    <Description>Fitomad.Guard is a .NET library implements the Guard clause approach.</Description>
+    <RepositoryUrl>https://github.com/fitomad/fitomad-guard</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>package-icon.jpg</PackageIcon>
   </PropertyGroup>
 
 </Project>
