@@ -40,4 +40,82 @@ public sealed partial class Guard
             Execute(perform);
         }
     }
+
+    public static void Contains(string content, string substring)
+    {
+        Guard.Contains(content, substring: substring, perform: ArgumentAction);
+    }
+
+    public static void Contains(string content, string substring, Action perform)
+    {
+        if (!content.Contains(substring))
+        {
+            Execute(perform);
+        }
+    }
+
+    public static void NotContains(string content, string substring)
+    {
+        Guard.NotContains(content, substring: substring, perform: ArgumentAction);
+    }
+
+    public static void NotContains(string content, string substring, Action perform)
+    {
+        if (content.Contains(substring))
+        {
+            Execute(perform);
+        }
+    }
+
+    public static void StarsWith(string content, string prefix)
+    {
+        Guard.StartsWith(content, prefix: prefix, perform: ArgumentAction);
+    }
+
+    public static void StartsWith(string content, string prefix, Action perform)
+    {
+        if (!content.StartsWith(prefix))
+        {
+            Execute(perform);
+        }
+    }
+
+    public static void NotStartsWith(string content, string prefix)
+    {
+        Guard.NotStartsWith(content, prefix: prefix, perform: ArgumentAction);
+    }
+
+    public static void NotStartsWith(string content, string prefix, Action perform)
+    {
+        if (content.StartsWith(prefix))
+        {
+            Execute(perform);
+        }
+    }
+
+    public static void EndsWith(string content, string prefix)
+    {
+        Guard.EndsWith(content, prefix: prefix, perform: ArgumentAction);
+    }
+
+    public static void EndsWith(string content, string prefix, Action perform)
+    {
+        if (!content.EndsWith(prefix))
+        {
+            Execute(perform);
+        }
+    }
+
+    public static void NotEndsWith(string content, string prefix)
+    {
+        Guard.NotEndsWith(content, prefix: prefix, perform: ArgumentAction);
+    }
+
+    public static void NotEndsWith(string content, string prefix, Action perform)
+    {
+        if (content.EndsWith(prefix))
+        {
+            Execute(perform);
+        }
+    }
 }
