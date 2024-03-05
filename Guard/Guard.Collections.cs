@@ -1,3 +1,5 @@
+using Fitomad.Guard.Resources;
+
 namespace Fitomad.Guard;
 
 public sealed partial class Guard
@@ -39,6 +41,11 @@ public sealed partial class Guard
         {
             Execute(perform);
         }
+    }
+
+    public static void NotEmpty<Element>(ICollection<Element> collection)
+    {
+        Guard.NotEmpty(collection, perform: ArgumentAction);
     }
 
     public static void NotEmpty<Element>(ICollection<Element> collection, Action perform)

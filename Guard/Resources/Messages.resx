@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<root>  
+  <!-- Boolean -->
+  <data name="IsTrue" xml:space="preserve">  
+    <value>Expected value is not true</value>  
+  </data>  
+  <data name="IsFalse" xml:space="preserve">  
+    <value>Expected value is not false</value>  
+  </data>
+  <!-- Comparables -->
+  <data name="InRange" xml:space="preserve">  
+    <value>{0} is not included in range {1}...{2}</value>  
+  </data>  
+  <data name="IsLower" xml:space="preserve">  
+    <value>{0} is not lower than {1}</value>  
+  </data> 
+  <data name="IsLowerOrEquals" xml:space="preserve">  
+    <value>{0} is not lower or equal than {1}</value>  
+  </data>
+  <data name="IsGreater" xml:space="preserve">  
+    <value>{0} is not greater than {1}</value>  
+  </data> 
+  <data name="IsGreaterOrEquals" xml:space="preserve">  
+    <value>{0} is not greater or equal than {1}</value>  
+  </data>
+</root>  

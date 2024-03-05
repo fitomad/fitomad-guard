@@ -22,4 +22,14 @@ public sealed partial class Guard
             throw;
         }
     }
+
+    private static Action MakeArgumentAction(string errorMessage)
+    {
+        Console.WriteLine(errorMessage);
+        Action action = () => {
+            throw new ArgumentException(errorMessage);
+        };
+
+        return action;
+    }
 }

@@ -1,3 +1,5 @@
+using Fitomad.Guard.Resources;
+
 namespace Fitomad.Guard;
 
 using ComparableBound = (int lowerBound, int upperBound);
@@ -6,6 +8,10 @@ public sealed partial class Guard
 {
     public static void InRange<Element>(Element value, Element lowerBound, Element upperBound) where Element : IComparable
     {
+        GuardResourceManager resourceManager = new();
+        var inRangeMessage = string.Format(resourceManager.InRangeMessage, value, lowerBound, upperBound);
+        Action inRangeAction = MakeArgumentAction(errorMessage: inRangeMessage);
+
         Guard.InRange(value, lowerBound: lowerBound, upperBound: upperBound, perform: RangeAction);
     }
 
