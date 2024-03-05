@@ -14,10 +14,7 @@ public sealed partial class Guard
     }
 
     public static void IsFalse(bool element) {
-        Guard.IsFalse(element, perform: () =>
-        {
-            throw new ArgumentException();
-        });
+        Guard.IsFalse(element, perform: ArgumentAction);
     }
 
     public static void IsFalse(bool element, Action perform) {

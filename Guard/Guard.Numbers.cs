@@ -1,5 +1,7 @@
 namespace Fitomad.Guard;
 
+using ComparableBound = (int lowerBound, int upperBound);
+
 public sealed partial class Guard
 {
     public static void InRange<Element>(Element value, Element lowerBound, Element upperBound) where Element : IComparable
@@ -18,53 +20,61 @@ public sealed partial class Guard
         }
     }
 
-    public static void NumberIsLower(double number, double lowerBound) 
+    public static void IsLower<Element>(Element value, Element lowerBound)  where Element : IComparable
     {
-        Guard.NumberIsLower(number, lowerBound: lowerBound, perform: ArgumentAction);   
+        Guard.IsLower(value, lowerBound: lowerBound, perform: ArgumentAction);   
     }
 
-    public static void NumberIsLower(double number, double lowerBound, Action perform) 
+    public static void IsLower<Element>(Element value, Element lowerBound, Action perform)  where Element : IComparable
     {
-        if (number >= lowerBound)
+        bool rangeStartCheck = value.CompareTo(lowerBound) >= 0;
+
+        if (rangeStartCheck)
         {
             Execute(perform);
         }
     }
 
-    public static void NumberIsLowerOrEquals(double number, double lowerBound) 
+    public static void IsLowerOrEquals<Element>(Element value, Element lowerBound)  where Element : IComparable
     {
-        Guard.NumberIsLowerOrEquals(number, lowerBound: lowerBound, perform: ArgumentAction);   
+        Guard.IsLowerOrEquals(value, lowerBound: lowerBound, perform: ArgumentAction);   
     }
 
-    public static void NumberIsLowerOrEquals(double number, double lowerBound, Action perform) 
+    public static void IsLowerOrEquals<Element>(Element value, Element lowerBound, Action perform)  where Element : IComparable
     {
-        if (number > lowerBound)
+        bool rangeStartCheck = value.CompareTo(lowerBound) >= 0;
+
+        if (rangeStartCheck)
         {
             Execute(perform);
         }
     }
 
-    public static void NumberIsGreater(double number, double upperBound) 
+    public static void IsGreater<Element>(Element value, Element upperBound)  where Element : IComparable
     {
-        Guard.NumberIsGreater(number, upperBound: upperBound, perform: ArgumentAction);
+        Guard.IsGreater(value, upperBound: upperBound, perform: ArgumentAction);
     }
 
-    public static void NumberIsGreater(double number, double upperBound, Action perform) 
+    public static void IsGreater<Element>(Element value, Element upperBound, Action perform)  where Element : IComparable
     {
-        if (number <= upperBound)
+        bool rangeEndCheck = value.CompareTo(upperBound) <= 0;
+
+        if (rangeEndCheck)
         {
             Execute(perform);
         }
     }
 
-    public static void NumberIsGreaterOrEquals(double number, double upperBound) 
+    public static void IsGreaterOrEquals<Element>(Element value, Element upperBound)  where Element : IComparable
     {
-        Guard.NumberIsGreaterOrEquals(number, upperBound: upperBound, perform: ArgumentAction);
+        Guard.IsGreaterOrEquals(value, upperBound: upperBound, perform: ArgumentAction);
     }
 
-    public static void NumberIsGreaterOrEquals(double number, double upperBound, Action perform) 
+    public static void IsGreaterOrEquals<Element>(Element value, Element upperBound, Action perform)  where Element : IComparable
     {
-        if (number < upperBound)
+        bool rangeEndCheck = value.CompareTo(upperBound) < 0;
+
+        if (rangeEndCheck)
         {
             Execute(perform);
         }
