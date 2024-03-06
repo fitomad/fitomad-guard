@@ -78,8 +78,81 @@ public class GuardStringTests
         Assert.Throws<ArgumentException>(testCode: () => 
         {
             Fitomad.Guard.Guard.Length(content, stringLength: (expectedLength + 1));
-        });
-        
+        });   
     }
 
+    [Theory]
+    [InlineData("fitomad", "itoma")]
+    [InlineData("Spain", "Spain")]
+    [InlineData("Madrid", "d")]
+    [InlineData("Madrid", "M")]
+    [InlineData("Spain", "pai")]
+    public void Test_StringContains(string content, string substring)
+    {
+        Fitomad.Guard.Guard.Contains(content, substring: substring);
+    }
+
+    [Theory]
+    [InlineData("Microsoft", "Apple")]
+    [InlineData("Spain", "USA")]
+    [InlineData("Madrid", "Seattle")]
+    [InlineData("Madrid", "New York")]
+    [InlineData("Spain", "count")]
+    public void Test_StringContainsThrowing(string content, string substring)
+    {
+        Assert.Throws<ArgumentException>(testCode: () => 
+        {
+            Fitomad.Guard.Guard.Contains(content, substring: substring);
+        }); 
+    }
+
+    [Theory]
+    [InlineData("fitomad", "fito")]
+    [InlineData("Spain", "Spa")]
+    [InlineData("Madrid", "M")]
+    [InlineData("Madrid", "Madri")]
+    [InlineData("Spain", "Spain")]
+    public void Test_StartsWith(string content, string testString)
+    {
+        Fitomad.Guard.Guard.StartsWith(content, prefix: testString);
+    }
+
+    [Theory]
+    [InlineData("Microsoft", "micro")]
+    [InlineData("Spain", "U")]
+    [InlineData("Madrid", "Seattl")]
+    [InlineData("Madrid", "New ")]
+    [InlineData("Spain", " ")]
+    public void Test_StartsWithThrowing(string content, string substring)
+    {
+        Assert.Throws<ArgumentException>(testCode: () => 
+        {
+            Fitomad.Guard.Guard.Contains(content, substring: substring);
+        }); 
+    }
+
+    [Theory]
+    [InlineData("fitomad", "mad")]
+    [InlineData("Spain", "in")]
+    [InlineData("Madrid", "d")]
+    [InlineData("Madrid", "adrid")]
+    [InlineData("USA", "SA")]
+    public void Test_EndsWith(string content, string testString)
+    {
+        Fitomad.Guard.Guard.EndsWith(content, suffix: testString);
+    }
+
+    [Theory]
+    [InlineData("Microsoft", "pple")]
+    [InlineData("Spain", "SA")]
+    [InlineData("Madrid", "eattle")]
+    [InlineData("Madrid", " York")]
+    [InlineData("Spain", "spain")]
+    public void Test_EndsWithThrowing(string content, string testString)
+    {
+        Assert.Throws<ArgumentException>(testCode: () => 
+        {
+            Fitomad.Guard.Guard.EndsWith(content, suffix: testString);
+        }); 
+    }
 }
