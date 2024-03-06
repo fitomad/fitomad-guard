@@ -24,7 +24,7 @@ public class GuardTests
     [InlineData("Is Not Null")]
     public void Test_NotNull(object parameter)
     {
-        Fitomad.Guard.Guard.IsNotNull(parameter);
+        Fitomad.Guard.Guard.NotNull(parameter);
     }
 
     [Theory]
@@ -32,7 +32,7 @@ public class GuardTests
     public void Test_NotNullThrowing(object parameter)
     {
         Assert.Throws<ArgumentException>(testCode: () => {
-            Fitomad.Guard.Guard.IsNotNull(parameter);
+            Fitomad.Guard.Guard.NotNull(parameter);
         });
     }
 
@@ -44,7 +44,7 @@ public class GuardTests
     [InlineData(100, 1009)]
     public void Test_NonEqualIntegers(int lhs, int rhs)
     {
-        Fitomad.Guard.Guard.NonEquals(lhs, rhs);
+        Fitomad.Guard.Guard.NotEquals(lhs, rhs);
     }
 
 
@@ -57,7 +57,7 @@ public class GuardTests
     public void Test_NonEqualIntegersThrowing(int lhs, int rhs)
     {
         Assert.Throws<ArgumentException>(testCode: () => {
-            Fitomad.Guard.Guard.NonEquals(lhs, rhs);
+            Fitomad.Guard.Guard.NotEquals(lhs, rhs);
         });
     }
 
@@ -69,7 +69,7 @@ public class GuardTests
     [InlineData("", "")]
     public void Test_EqualString(string lhs, string rhs)
     {
-        Fitomad.Guard.Guard.Equals(lhs, rhs);
+        Fitomad.Guard.Guard.IsEquals(lhs, rhs);
     }
 
     [Theory]
@@ -81,7 +81,7 @@ public class GuardTests
     public void Test_EqualStringThrowing(string lhs, string rhs)
     {
         Assert.Throws<ArgumentException>(testCode: () => {
-            Fitomad.Guard.Guard.Equals(lhs, rhs);
+            Fitomad.Guard.Guard.IsEquals(lhs, rhs);
         });
     }
 
@@ -90,7 +90,7 @@ public class GuardTests
     public void Test_NonEqualNonThrowingAction(string lhs, string rhs)
     {
         Assert.Throws<ArgumentException>(testCode: () => {
-            Fitomad.Guard.Guard.NonEquals(lhs, rhs, perform: () => {
+            Fitomad.Guard.Guard.NotEquals(lhs, rhs, perform: () => {
                 // We do some work here...
             });
         });
@@ -101,7 +101,7 @@ public class GuardTests
     public void Test_NonEqualThrowingActionCustomException(string lhs, string rhs)
     {
         Assert.Throws<GuardTestException>(testCode: () => {
-            Fitomad.Guard.Guard.NonEquals(lhs, rhs, perform: () => {
+            Fitomad.Guard.Guard.NotEquals(lhs, rhs, perform: () => {
                 // We do some work here...
                 throw new GuardTestException();
             });

@@ -2,8 +2,12 @@ using Fitomad.Guard;
 
 namespace Guard.Tests;
 
-public class GuardNumberTests
+public class GuardComparableTests
 {
+    private DateTime Today => DateTime.Now;
+    private DateTime Tomorrow => DateTime.Now.AddDays(1);
+    private DateTime Yesterday => DateTime.Now.AddDays(-1);
+
     [Theory]
     [InlineData(5, 0, 10)]
     [InlineData(0, -5, 5)]
@@ -86,9 +90,9 @@ public class GuardNumberTests
     [Theory]
     [InlineData(1, 0)]
     [InlineData(0, -1)]
-    public void Test_GreaterInteger(int value, int otherNumber)
+    public void Test_Greater(IComparable value, IComparable otherNumber)
     {
-        Fitomad.Guard.Guard.NumberIsGreater(number: value, upperBound: otherNumber);
+        Fitomad.Guard.Guard.IsGreater(value, upperBound: otherNumber);
     }
 
     [Theory]
@@ -96,7 +100,7 @@ public class GuardNumberTests
     [InlineData(0.0, -0.1)]
     public void Test_GreaterDouble(double value, double otherNumber)
     {
-        Fitomad.Guard.Guard.NumberIsGreater(number: value, upperBound: otherNumber);
+        Fitomad.Guard.Guard.IsGreater(value, upperBound: otherNumber);
     }
 
     [Theory]
@@ -105,7 +109,7 @@ public class GuardNumberTests
     public void Test_GreaterIntegerThrowing(int value, int otherNumber)
     {
         Assert.Throws<ArgumentException>(testCode: () => {
-            Fitomad.Guard.Guard.NumberIsGreater(number: value, upperBound: otherNumber);
+            Fitomad.Guard.Guard.IsGreater(value, upperBound: otherNumber);
         });
     }
 
@@ -115,7 +119,7 @@ public class GuardNumberTests
     public void Test_GreaterDoubleThrowing(double value, double otherNumber)
     {
         Assert.Throws<ArgumentException>(testCode: () => {
-            Fitomad.Guard.Guard.NumberIsGreater(number: value, upperBound: otherNumber);
+            Fitomad.Guard.Guard.IsGreater(value, upperBound: otherNumber);
         });
     }
 
@@ -125,7 +129,7 @@ public class GuardNumberTests
     [InlineData(-1, 0)]
     public void Test_LowerInteger(int value, int otherNumber)
     {
-        Fitomad.Guard.Guard.NumberIsLower(number: value, lowerBound: otherNumber);
+        Fitomad.Guard.Guard.IsLower(value, lowerBound: otherNumber);
     }
 
     [Theory]
@@ -133,7 +137,7 @@ public class GuardNumberTests
     [InlineData(-0.1, 0.0)]
     public void Test_LowerDouble(double value, double otherNumber)
     {
-        Fitomad.Guard.Guard.NumberIsLower(number: value, lowerBound: otherNumber);
+        Fitomad.Guard.Guard.IsLower(value, lowerBound: otherNumber);
     }
 
     [Theory]
@@ -142,7 +146,7 @@ public class GuardNumberTests
     public void Test_LowerIntegerThrowing(int value, int otherNumber)
     {
         Assert.Throws<ArgumentException>(testCode: () => {
-            Fitomad.Guard.Guard.NumberIsLower(number: value, lowerBound: otherNumber);
+            Fitomad.Guard.Guard.IsLower(value, lowerBound: otherNumber);
         });
     }
 
@@ -152,7 +156,88 @@ public class GuardNumberTests
     public void Test_LowerDoubleThrowing(double value, double otherNumber)
     {
         Assert.Throws<ArgumentException>(testCode: () => {
-            Fitomad.Guard.Guard.NumberIsLower(number: value, lowerBound: otherNumber);
+            Fitomad.Guard.Guard.IsLower(value: value, lowerBound: otherNumber);
+        });
+    }
+
+    [Fact]
+    public void Test_DateInRange()
+    {
+        Fitomad.Guard.Guard.InRange(Today, lowerBound: Yesterday, upperBound:Tomorrow);
+    }
+
+    [Fact]
+    public void Test_DateInRangeThrowing()
+    {
+        Assert.Throws<IndexOutOfRangeException>(testCode: () => 
+        {
+            Fitomad.Guard.Guard.InRange(Yesterday, lowerBound: Today, upperBound:Tomorrow); 
+        });
+    }
+
+    [Fact]
+    public void Test_DateInRangeThrowingCustom()
+    {
+        Assert.Throws<GuardTestException>(testCode: () => 
+        {
+            Fitomad.Guard.Guard.InRange(Yesterday, lowerBound: Today, upperBound:Tomorrow, perform: () =>
+            {
+                throw new GuardTestException();
+            }); 
+        });
+    }
+
+    [Fact]
+    public void Test_DateLower()
+    {
+        Fitomad.Guard.Guard.IsLower(Yesterday, lowerBound: Today);
+    }
+
+    [Fact]
+    public void Test_DateLowerThrowing()
+    {
+        Assert.Throws<ArgumentException>(testCode: () => 
+        {
+            Fitomad.Guard.Guard.IsLower(Today, lowerBound: Yesterday); 
+        });
+    }
+
+    [Fact]
+    public void Test_DateLowerThrowingCustom()
+    {
+        Assert.Throws<GuardTestException>(testCode: () => 
+        {
+            Fitomad.Guard.Guard.IsLower(Today, lowerBound: Yesterday, perform: () =>
+            {
+                throw new GuardTestException();
+            }); 
+        });
+    }
+
+    [Fact]
+    public void Test_DateGreater()
+    {
+        Fitomad.Guard.Guard.IsGreater(Tomorrow, upperBound: Today);
+    }
+
+    [Fact]
+    public void Test_DateGreaterThrowing()
+    {
+        Assert.Throws<ArgumentException>(testCode: () => 
+        {
+            Fitomad.Guard.Guard.IsGreater(Today, upperBound: Tomorrow); 
+        });
+    }
+
+    [Fact]
+    public void Test_DateGreaterThrowingCustom()
+    {
+        Assert.Throws<GuardTestException>(testCode: () => 
+        {
+            Fitomad.Guard.Guard.IsGreater(Today, upperBound: Tomorrow, perform: () =>
+            {
+                throw new GuardTestException();
+            }); 
         });
     }
 }
